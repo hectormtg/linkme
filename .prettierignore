@@ -1,0 +1,7 @@
+build
+package.json
+package-lock.json
+.*
+src/css/material/**/*.css
+src/css/material/**/*.scss
+src/css/theme.css

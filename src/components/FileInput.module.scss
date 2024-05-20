@@ -1,0 +1,20 @@
+.container {
+  transition: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.imageContainer {
+  > img {
+    height: 100%;
+    max-width: unset;
+  }
+}
+
+.preview:hover {
+  .imageContainer {
+    filter: brightness(0.5);
+  }
+
+  .placeholder {
+    opacity: 1;
+  }
+}

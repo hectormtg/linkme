@@ -2,9 +2,9 @@
 
 import AnimatedElement from '@/components/AnimatedElement'
 import DevicePreview from '@/components/DevicePreview'
-import LinksView from '@/components/LinksView'
 import NavBar from '@/components/NavBar'
 import { withAuthentication } from '@/hocs/auth.hoc'
+import UserProfile from './UserProfile'
 
 const Home = () => {
   return (
@@ -14,7 +14,7 @@ const Home = () => {
       <section className='flex flex-grow gap-6 overflow-y-auto'>
         <DevicePreview />
 
-        <LinksView />
+        <UserProfile />
       </section>
     </AnimatedElement>
   )
