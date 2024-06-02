@@ -24,11 +24,9 @@ export const withAuthentication = (WrappedComponent: FC, LoadingComponent?: FC):
 
     // const user = userResponse
 
-    const isInBrowser = typeof window !== 'undefined'
-    if (isInBrowser) {
-      if (!authLoading && !isLogged) {
-        router.replace('/auth/login')
-      }
+    if (!authLoading && !isLogged) {
+      router.replace('/auth/login')
+      return null
     }
 
     return <WrappedComponent {...props} />
@@ -38,7 +36,7 @@ export const withAuthentication = (WrappedComponent: FC, LoadingComponent?: FC):
 }
 
 export const withoutAuthentication = (WrappedComponent: ComponentType): ComponentType => {
-  const UnauthorizedComponent: FC = props => {
+  const UnauthorizedComponent: ComponentType = props => {
     const isLogged = useAtomValue(isLoggedAtom)
     const router = useRouter()
     const { loading } = useAuthentication()
