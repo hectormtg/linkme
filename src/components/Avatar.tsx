@@ -5,9 +5,11 @@ import { twMerge } from 'tailwind-merge'
 
 interface Props extends ImgHTMLAttributes<HTMLImageElement> {
   defaultText?: string
+  width?: number
+  height?: number
 }
 
-const Avatar = ({ defaultText, ...allProps }: Props) => {
+const Avatar = ({ defaultText, width, height, ...allProps }: Props) => {
   const { className, ...props } = allProps
 
   const hasDefaultText = defaultText && isValidString(defaultText)
@@ -17,7 +19,8 @@ const Avatar = ({ defaultText, ...allProps }: Props) => {
   return (
     <div
       className={twMerge(
-        'rounded-full border-2 border-purple-main aspect-square flex-shrink-0 min-h-[120px] bg-primary flex items-center justify-center select-none text-[3em] text-low-gray overflow-hidden',
+        'rounded-full border-2 border-purple-main aspect-square flex-shrink-0 min-h-[120px] bg-primary select-none text-[3em] text-low-gray overflow-hidden flex',
+        !props.src && hasDefaultText && 'items-center justify-center',
         className
       )}
       {...props}
@@ -27,8 +30,9 @@ const Avatar = ({ defaultText, ...allProps }: Props) => {
         <Image
           src={props.src || ''}
           alt={defaultText || 'profile-image'}
-          width={120}
-          height={120}
+          width={width || 120}
+          height={height || 120}
+          className='object-cover'
         />
       )}
     </div>

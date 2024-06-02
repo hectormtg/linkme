@@ -20,15 +20,17 @@ const UserProfile = () => {
 
   const handleSave = () => {
     try {
-      console.log(payload)
       const errors = {
         name: !isValidString(payload.name),
         lastName: !isValidString(payload.lastName),
         email: !isValidString(payload.email) || !isValidEmail(payload.email || ''),
       }
       setErrors(errors)
+      if (payload.image) {
+        setUser({ ...user, image: payload.image })
+      }
       if (Object.values(errors).some(Boolean)) throw Error()
-      setUser(payload)
+      setUser({ ...payload, userName: user.userName })
       notify('Profile info updated', 'success')
     } catch (err) {
       notify('Some fields are missing', 'error')
@@ -71,6 +73,7 @@ const UserProfile = () => {
                 <FileInput
                   className='bg-white'
                   onFileChange={handleImageChange}
+                  value={user.image}
                 />
               ),
             },

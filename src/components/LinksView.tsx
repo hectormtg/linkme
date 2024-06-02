@@ -21,10 +21,6 @@ const LinksView = () => {
   const showErrors = useAtomValue(showErrorsAtom)
   const linkErrors = useAtomValue(linkErrorsAtom)
 
-  console.log('Show errors: ', showErrors)
-  console.log('linkErrors: ', linkErrors)
-  console.log('links: ', links)
-
   const hasLinks = links.length > 0
 
   const listRef = useRef<HTMLDivElement>()

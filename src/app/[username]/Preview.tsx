@@ -12,20 +12,20 @@ const Preview = () => {
 
   return (
     <div className='flex flex-grow justify-center items-center'>
-      <div className='p-10 bg-white rounded-2xl min-h-[550px] min-w-[320px] md:shadow-lg flex flex-col gap-12'>
-        <section className='flex flex-col gap-2 items-center'>
+      <div className='py-10 bg-white rounded-2xl min-h-[550px] min-w-[320px] md:shadow-lg flex flex-col gap-12 overflow-hidden max-h-[80vh]'>
+        <section className='flex flex-col gap-2 items-center px-10'>
           <Avatar
             className='mb-2'
             src={user.image}
-            defaultText={user.name || user.email}
+            defaultText={user.name || user.userName}
           />
           <span className='text-[28px] font-bold'>
             {user.name} {user.lastName}
           </span>
-          <span className='text-gray'>{user.email}</span>
+          <span className='text-gray'>{user.userName}</span>
         </section>
 
-        <section className='flex flex-col gap-4'>
+        <section className='flex flex-col gap-4 overflow-auto px-10'>
           {links.map(link => (
             <LinkItem
               key={link.id}

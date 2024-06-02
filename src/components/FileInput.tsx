@@ -9,12 +9,15 @@ import styles from './FileInput.module.scss'
 interface Props extends HTMLAttributes<HTMLDivElement> {
   inputProps?: HTMLAttributes<HTMLInputElement>
   onFileChange?: (file: FilePreview | undefined) => void
+  value?: string
 }
 
-const FileInput = ({ inputProps, ...allProps }: Props) => {
+const FileInput = ({ inputProps, value, ...allProps }: Props) => {
   const { className, onFileChange, ...props } = allProps
 
   const [file, setFile] = useState<Partial<FilePreview>>()
+
+  const hasFile = file || value
 
   const { getInputProps, getRootProps } = useDropzone({
     onDrop: acceptedFiles => {
@@ -41,7 +44,7 @@ const FileInput = ({ inputProps, ...allProps }: Props) => {
         className={twMerge(
           styles.container,
           'rounded-md bg-primary border border-dashed border-low-gray hover:border-purple-main hover:bg-purple-lighter hover:fill-purple-main hover:text-purple-main text-gray p-6 aspect-square flex flex-col items-center justify-center fill-gray text-sm font-medium cursor-pointer flex-shrink-0 relative overflow-hidden w-[65%] max-w-[250px] min-w-[200px] md:max-w-none md:w-auto md:min-w-0',
-          file && styles.preview,
+          hasFile && styles.preview,
           className
         )}
       >
@@ -52,13 +55,13 @@ const FileInput = ({ inputProps, ...allProps }: Props) => {
         <div
           className={twMerge(
             'flex flex-col gap-2 items-center justify-center transition-opacity',
-            file && 'z-10 opacity-0 text-white fill-white drop-shadow-lg',
+            hasFile && 'z-10 opacity-0 text-white fill-white drop-shadow-lg',
             styles.placeholder
           )}
         >
-          <ImageIcon />+ {file ? 'Change' : 'Upload'} Image
+          <ImageIcon />+ {hasFile ? 'Change' : 'Upload'} Image
         </div>
-        {file && (
+        {hasFile && (
           <div
             className={twMerge(
               'absolute inset-0 bg-center bg-no-repeat bg-cover',
@@ -66,7 +69,7 @@ const FileInput = ({ inputProps, ...allProps }: Props) => {
             )}
             id='image-container'
             style={{
-              backgroundImage: `url(${file?.preview || ''})`,
+              backgroundImage: `url(${file?.preview || value || ''})`,
             }}
           />
         )}
