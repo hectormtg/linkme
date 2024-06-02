@@ -7,10 +7,7 @@ import { useAtomValue } from 'jotai'
 import { useRouter } from 'next/navigation'
 import { ComponentType, FC } from 'react'
 
-export const withAuthentication = (
-  WrappedComponent: ComponentType,
-  LoadingComponent?: ComponentType
-): ComponentType => {
+export const withAuthentication = (WrappedComponent: FC, LoadingComponent?: FC): FC => {
   const AuthorizedComponent: FC = props => {
     const router = useRouter()
     const { loading: authLoading } = useAuthentication()

@@ -14,7 +14,7 @@ interface Props {
 const LinkItem = ({ link, readOnly }: Props) => {
   const router = useRouter()
 
-  const anchorRef = useRef<HTMLAnchorElement>()
+  const anchorRef = useRef<any>()
 
   const STYLES = useMemo(
     () => ({

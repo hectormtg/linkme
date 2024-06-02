@@ -1,7 +1,7 @@
 'use client'
 
 import { withoutAuthentication } from '@/hocs/auth.hoc'
-import { ReactNode } from 'react'
+import { ComponentType, ReactNode } from 'react'
 import MainLogoSm from '../../../public/icons/MainLogoSm'
 
 const Layout = ({ children }: { children: ReactNode }) => {
@@ -20,4 +20,4 @@ const Layout = ({ children }: { children: ReactNode }) => {
   )
 }
 
-export default withoutAuthentication(Layout)
+export default withoutAuthentication(Layout as ComponentType)
